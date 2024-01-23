@@ -1,14 +1,24 @@
+import java.util.Map;
+
 public class Vial {
+    enum Colour {
+        RED,
+        ORANGE,
+        YELLOW,
+        GREEN,
+        BLUE,
+        VIOLET,
+        PINK
+    }
 
     private int size;
-    private char topLiquid; // the highest non-null value
+    private Map<Colour, Integer> topLiquid;
     private char[] liquids;
     private boolean full;
 
     public Vial(int s) {
         size = s;
         liquids = new char[size];
-        topLiquid = liquids[0];
         full = false;
     }
 
@@ -26,7 +36,7 @@ public class Vial {
 
     public void fill(Vial other) { // add liquid from other vial
         while (validate(other)) {
-            
+
         }
     }
 
