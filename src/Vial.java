@@ -24,10 +24,13 @@ public class Vial {
 
     public boolean validate(Vial other) { // used in the fill method.
         if (other.getLiquids().length != this.liquids.length) { // length mismatch.
+            System.out.println("[ERROR] Length mismatch.");
             return false;
         } else if (this.full) { // full vial.
+            System.out.println("[ERROR] Current vial is full.");
             return false;
         } else if (this.topLiquid != other.topLiquid) { // liquid mismatch.
+            System.out.println("[ERROR] Liquid mismatch.");
             return false; 
         }
 
