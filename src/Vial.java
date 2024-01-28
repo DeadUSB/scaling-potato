@@ -8,7 +8,8 @@ public class Vial {
         GREEN,
         BLUE,
         VIOLET,
-        PINK
+        PINK,
+        EMPTY
     }
 
     private int size;
