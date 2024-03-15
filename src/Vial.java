@@ -1,50 +1,67 @@
-import java.util.Map;
+import java.lang.StringBuilder;
+import java.util.Stack;
 
 public class Vial {
-    enum Colour {
-        RED,
-        ORANGE,
-        YELLOW,
-        GREEN,
-        BLUE,
-        VIOLET,
-        PINK,
-        EMPTY
+    private Stack<Colour> vial;
+    private int length;
+    private int maxlength;
+
+    public Vial(int size) {
+        vial = new Stack<Colour>();
+
+        length = 0;
+        maxlength = size;
     }
 
-    private int size;
-    private Map<Colour, Integer> topLiquid;
-    private char[] liquids;
-    private boolean full;
+    public Vial(Colour[] clist) {
+        vial = new Stack<Colour>();
 
-    public Vial(int s) {
-        size = s;
-        liquids = new char[size];
-        full = false;
+        length = clist.length;
+        maxlength = clist.length;
+
+        for (Colour c : clist) { vial.push(c); }
     }
 
-    public boolean validate(Vial other) { // used in the fill method.
-        if (other.getLiquids().length != this.liquids.length) { // length mismatch.
-            System.out.println("[ERROR] Length mismatch.");
-            return false;
-        } else if (this.full) { // full vial.
-            System.out.println("[ERROR] Current vial is full.");
-            return false;
-        } else if (this.topLiquid != other.topLiquid) { // liquid mismatch.
-            System.out.println("[ERROR] Liquid mismatch.");
-            return false; 
+    public boolean isEmpty() { return vial.empty(); }
+    public boolean isFull() { return length == maxlength; }
+
+    public Colour top() {
+        if (isEmpty()) return null;
+        else return vial.peek();
+    }
+
+    public Colour pour(Vial other) {
+        if (other.isEmpty() || other.top() == top()) return vial.pop();
+        else return null; 
+    }
+
+    public void fill(Colour fill) {
+        if (fill != null) vial.push(fill);
+    }
+
+    public String toString() {
+        if (isEmpty()) return "The vial is empty.";
+
+        StringBuilder rtn = new StringBuilder();
+
+        for (Colour c : vial) {
+            rtn.append(c).append(" ");
         }
 
-        return true;
+        return rtn.toString();
     }
 
-    public void fill(Vial other) { // add liquid from other vial
-        while (validate(other)) {
+    public static void main(String[] args) {
+        Vial v1 = new Vial(5);
 
-        }
-    }
+        Colour[] v2List = { Colour.BLUE, Colour.RED, Colour.GREEN, Colour.YELLOW }; 
 
-    public char[] getLiquids() {
-        return liquids;
+        Vial v2 = new Vial(v2List);
+
+        System.out.println(v1);
+        System.out.println(v2);
+
+        System.out.println(v1.top());
+        System.out.println(v2.top());
     }
 }
